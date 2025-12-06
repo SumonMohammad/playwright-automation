@@ -24,13 +24,16 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: lts/*
-        cache: "npm"
+        cache: "none"
 
     - name: Install dependencies
       run: npm ci
 
+    - name: Clear old Playwright cache
+      run: rm -rf ~/.cache/ms-playwright
+
     - name: Install Playwright Browsers
-      run: npx playwright install --with-deps ${{ matrix.browser }}
+      run: npx playwright install --with-deps --force ${{ matrix.browser }}
 
     - name: Run Playwright Tests
       run: npx playwright test --project=${{ matrix.browser }}
