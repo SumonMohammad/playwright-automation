@@ -31,11 +31,9 @@ export class LoginPage{
   async login(username: string, password: string) {
     await this.usernameInput.fill(username);
     await this.passwordInput.fill(password);
-    await Promise.all([
-        this.page.waitForURL(/logged-in-successfully/),
-        this.loginButton.click()
-    ]);
-}
+    await this.loginButton.click()
+   
+   }
 
 
 }
